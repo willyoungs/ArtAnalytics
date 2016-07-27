@@ -21,7 +21,7 @@ class PiecesController < ApplicationController
   def edit
   end
   def search
-   @pieces = Piece.where("artist == ?", params[:q])
+   @pieces = Piece.where("artist = ?", params[:q])
    @avg = @pieces.collect(&:price).sum.to_f/@pieces.length if @pieces.length > 0
   end
   def home
