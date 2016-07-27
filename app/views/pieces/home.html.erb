@@ -1,0 +1,54 @@
+<head>
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12"style="text-align:center">
+      <h1><b>Biscovery Ltd. Artsty Analytics</b></h1>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-md-12"style="text-align:center">
+      <h6>Created by: Lili Zhang & Will Youngs</h6>
+    </div>
+  </div>
+<div class="row">
+<%= form_tag(controller: "pieces", action: "search",method: "get") do %>
+  <%= label_tag(:q, "Get Stats by Artist:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+<div>
+  <%= form_tag(controller: "pieces", action: "avg_price_by_artist", method: "get") do %>
+  <%= submit_tag("Analyze average price of artists")%>
+  <% end %>
+</div>
+</div>
+  <div>
+    <h3>Average price: $<%=@avg %></h3>
+  </div>
+  <table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pieces.each do |piece| %>
+      <tr>
+        <td><%=piece.name %></td>
+        <td><%=piece.artist %></td>
+        <td><%=piece.price %></td>
+        <td><%=piece.area %></td>
+        <td><%=piece.birthdate%></td>
+        <td><%=piece.deathdate %></td>
+        <!--<td><%= link_to 'Show', piece %></td>-->
+        <!--<td><%= link_to 'Edit', edit_piece_path(piece) %></td>-->
+        <!--<td><%= link_to 'Destroy', piece, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
