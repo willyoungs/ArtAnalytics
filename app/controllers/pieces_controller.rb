@@ -33,7 +33,7 @@ class PiecesController < ApplicationController
     @artist_and_avg = []
     @artists = Piece.artists
     @artists.each do |a|
-      @artistPieces = Piece.where("artist == ?", a)
+      @artistPieces = Piece.where("artist = ?", a)
       @avg = @artistPieces.collect(&:price).sum.to_f/@artistPieces.length if @artistPieces.length > 0
       @temp = {"artist" => a, "avg" => @avg}
       @artist_and_avg.push(@temp)
