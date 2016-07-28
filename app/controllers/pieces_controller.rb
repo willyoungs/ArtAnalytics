@@ -16,7 +16,21 @@ class PiecesController < ApplicationController
   def new
     @piece = Piece.new
   end
-  
+ 
+  def plot_area_and_price
+    @pieces = Piece.all
+    #@vals = [{"name" => name, "area" => area ,"price" => price},..]
+    @vals = []
+    t = 10
+    @pieces.each do |p|
+      @temp = {"name"=> p.name, "area" => p.area.to_f, "price" => p.price.to_f}
+      @vals.push(@temp)
+      t = t - 1
+      if t == 0
+        break
+      end
+    end
+  end
   # GET /pieces/1/edit
   def edit
   end
@@ -38,6 +52,30 @@ class PiecesController < ApplicationController
       @temp = {"artist" => a, "avg" => @avg}
       @artist_and_avg.push(@temp)
     end
+  end
+  def price_by_birthdate_deathdate
+    @pieces = Piece.all
+    @bvals = []
+    @birthdates = Piece.birthdates
+    @deathdates = Piece.deathdates
+    @birthdates.each do |b|
+      @birthdatePieces = Piece.where("birthdate = ?", b)
+      @avg = @birthdatePieces.collect(&:price).sum.to_f/@birthdatePieces.length if @birthdatePieces.length > 0
+      @temp = {"birthdate" => b, "avg" => @avg}
+      @bvals.push(@temp)
+    end
+    @dvals = []
+    @deathdates.each do |d|
+      @deathdatePieces = Piece.where("deathdate = ?", d)
+      @avg = @deathdatePieces.collect(&:price).sum.to_f/@deathdatePieces.length if @deathdatePieces.length > 0
+      @temp = {"deathdate" => d, "avg" => @avg}
+      @dvals.push(@temp)
+    end
+    @bvals.delete_if { |h| h["birthdate"] == nil }
+    @bvals.sort_by!{|hsh| hsh["birthdate"]}
+    @dvals.delete_if { |h| h["deathdate"] == nil }
+    @dvals.sort_by!{|hsh| hsh["deathdate"]}
+    
   end
   # POST /pieces
   # POST /pieces.json

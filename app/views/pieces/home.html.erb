@@ -13,18 +13,35 @@
       <h6>Created by: Lili Zhang & Will Youngs</h6>
     </div>
   </div>
+  <%= image_tag("test1.jpg", :class => "img-responsive")%>
 <div class="row">
+<div class="col-md-6">
 <%= form_tag(controller: "pieces", action: "search",method: "get") do %>
   <%= label_tag(:q, "Get Stats by Artist:") %>
   <%= text_field_tag(:q) %>
   <%= submit_tag("Search") %>
 <% end %>
-<div>
-  <%= form_tag(controller: "pieces", action: "avg_price_by_artist", method: "get") do %>
-  <%= submit_tag("Analyze average price of artists")%>
-  <% end %>
 </div>
+
+<div class="col-md-3">
+    <br>
+    <div>
+      <%= form_tag(controller: "pieces", action: "avg_price_by_artist", method: "get") do %>
+      <%= submit_tag("Analyze average price of artists")%>
+      <% end %>
+    </div>
 </div>
+  <div class="col-md-3">
+    <br>
+    <div>
+      <%= form_tag(controller: "pieces", action: "price_by_birthdate_deathdate", method: "get") do %>
+      <%= submit_tag("YEAHHHHH")%>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
   <div>
     <h3>Average price: $<%=@avg %></h3>
   </div>
