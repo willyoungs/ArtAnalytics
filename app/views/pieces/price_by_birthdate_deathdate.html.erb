@@ -21,8 +21,18 @@
   <%= form_tag(controller: "pieces", action: "home", method: "get") do %>
   <%= submit_tag("Back to Home:")%>
   <% end %>
-</div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Average price by birthdate</h2>
+    </div>
+  </div>
   <%= content_tag :div, "", id: "orders_chart",data:{orders: @bvals}%>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Average price by deathdate</h2>
+    </div>
+  </div>
   <%= content_tag :div, "", id: "death_chart",data:{death: @dvals}%>
 
   <script>
